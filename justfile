@@ -19,8 +19,8 @@ start:
 lint:
     pnpm exec eslint .
 
-migrate:
-	docker compose -f {{dev}} exec {{app_service}} npx prisma migrate dev --name init
+migrate name="unamed":
+	docker compose -f {{dev}} exec {{app_service}} npx prisma migrate dev --name {{name}}
 
 studio:
 	docker compose -f {{dev}} exec {{app_service}} npx prisma studio

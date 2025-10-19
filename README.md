@@ -2,7 +2,6 @@
 
 A Node.js + TypeScript backend for menu management, built for the internship assignment.  
 This application manages **Categories**, **Subcategories**, and **Items**, providing some CRUD operations and search functionality.
----
 
 ## Features
 

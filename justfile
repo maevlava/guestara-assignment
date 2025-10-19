@@ -28,6 +28,9 @@ studio:
 reset-db:
 	docker compose -f {{dev}} exec {{app_service}} npx prisma migrate reset --force
 
+generate:
+    docker compose -f {{dev}} exec {{app_service}} npx prisma generate
+
 run-dev:
     docker compose -f {{dev}} up --build -d
 run-prod:

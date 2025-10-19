@@ -11,14 +11,13 @@ const CategoryError = {
     INVALID_NAME: {status: 400, message: 'Invalid category name'}
 }
 
-const registerRoutes = () => {
-    router.post('/api/categories', createCategory)
-    router.get('/api/categories', getAllCategories)
-    router.get('/api/categories/name/:name', getCategoryByName)
-    router.get('/api/categories/:id', getCategoryById)
-    router.put('/api/categories/:id', updateCategory)
+const registerRoutes = (router: Router) => {
+    router.post('/categories', createCategory)
+    router.get('/categories', getAllCategories)
+    router.get('/categories/search', getCategoryByName)
+    router.get('/categories/:id', getCategoryById)
+    router.put('/categories/:id', updateCategory)
 }
-registerRoutes()
 
 const createCategory = async (req: Request, res: Response) => {
     let category: any
@@ -97,5 +96,9 @@ const updateCategory = async (req: Request, res: Response) => {
         return sendAPIError(res, CategoryError.UPDATE_FAILED)
     }
 
-    return sendData(res, category)
+    return sendAPIData(res, category)
+}
+
+export const CategoryHandler = {
+    registerRoutes,
 }

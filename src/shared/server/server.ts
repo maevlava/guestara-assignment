@@ -16,4 +16,4 @@ router.get('/', (req, res) => {
     res.send('Hello world')
 })
 
-export {server}
+export {server, router}

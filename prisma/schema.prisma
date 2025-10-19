@@ -19,19 +19,42 @@ model Category {
   updatedAt     DateTime @updatedAt
 
   subCategories SubCategory[]
+  Item          Item[]
 }
 
 model SubCategory {
-  id            String    @id @default(uuid())
+  id            String   @id @default(uuid())
   name          String
   image         String
   description   String
-  taxApplicable Boolean   @default(false)
+  taxApplicable Boolean  @default(false)
   taxNumber     Float
   taxType       String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  Category      Category? @relation(fields: [categoryId], references: [id])
-  categoryId    String?
+  Category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
+
+  Item Item[]
+}
+
+model Item {
+  id            String   @id @default(uuid())
+  name          String
+  image         String
+  description   String
+  taxApplicable Boolean  @default(false)
+  tax           Float
+  baseAmount    Float
+  discount      Float
+  totalAmount   Float
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  categoryId String?
+  Category   Category? @relation(fields: [categoryId], references: [id])
+
+  subCategoryId String?
+  SubCategory   SubCategory? @relation(fields: [subCategoryId], references: [id])
 }

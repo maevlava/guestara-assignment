@@ -3,6 +3,7 @@ import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import {CategoryHandler} from "../../internal/features/category/handler";
 import {SubCategoryHandler} from "../../internal/features/subcategory/handler";
+import {ItemHandler} from "../../internal/features/item/handler";
 
 const server: Express = express()
 const router = Router()
@@ -21,5 +22,6 @@ router.get('/', (req, res) => {
 // Handlers
 CategoryHandler.registerRoutes(router)
 SubCategoryHandler.registerRoutes(router)
+ItemHandler.registerRoutes(router)
 
 export {server, router}

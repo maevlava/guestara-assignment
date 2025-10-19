@@ -1,7 +1,6 @@
-import {router} from "../../../shared/server/server"
-import {Request, Response} from "express"
+import {Request, Response, Router} from "express"
 import {CategoryService} from "./category";
-import {sendAPIError, sendData} from "../../../shared/common/response";
+import {sendAPIError, sendAPIData} from "../../../shared/common/response";
 
 const CategoryError = {
     NOT_FOUND: {status: 404, message: 'Category not found'},
@@ -28,7 +27,7 @@ const createCategory = async (req: Request, res: Response) => {
     } catch (e) {
         sendAPIError(res, CategoryError.CREATE_FAILED)
     }
-    return sendData(res, category)
+    return sendAPIData(res, category)
 }
 
 const getAllCategories = async (req: Request, res: Response) => {
@@ -38,7 +37,7 @@ const getAllCategories = async (req: Request, res: Response) => {
     } catch (e) {
         sendAPIError(res, CategoryError.GET_FAILED)
     }
-    return sendData(res, categories)
+    return sendAPIData(res, categories)
 }
 
 const getCategoryById = async (req: Request, res: Response) => {
@@ -57,14 +56,14 @@ const getCategoryById = async (req: Request, res: Response) => {
     }catch (e) {
         return sendAPIError(res, CategoryError.GET_FAILED)
     }
-    return sendData(res, category)
+    return sendAPIData(res, category)
 }
 
 const getCategoryByName = async (req: Request, res: Response) => {
     let category: any
     try {
-        const name = req.params.name
-        if (!name) {
+        const {name} = req.query
+        if (!name || typeof name !== 'string') {
             return sendAPIError(res, CategoryError.INVALID_NAME)
         }
 
@@ -76,7 +75,7 @@ const getCategoryByName = async (req: Request, res: Response) => {
     } catch (e) {
         return sendAPIError(res, CategoryError.GET_FAILED)
     }
-    return sendData(res, category)
+    return sendAPIData(res, category)
 }
 
 const updateCategory = async (req: Request, res: Response) => {

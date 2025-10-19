@@ -17,4 +17,21 @@ model Category {
   taxType       String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+
+  subCategories SubCategory[]
+}
+
+model SubCategory {
+  id            String    @id @default(uuid())
+  name          String
+  image         String
+  description   String
+  taxApplicable Boolean   @default(false)
+  taxNumber     Float
+  taxType       String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  Category      Category? @relation(fields: [categoryId], references: [id])
+  categoryId    String?
 }

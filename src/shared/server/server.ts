@@ -2,6 +2,7 @@ import express, {type Express, Router} from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import {CategoryHandler} from "../../internal/features/category/handler";
+import {SubCategoryHandler} from "../../internal/features/subcategory/handler";
 
 const server: Express = express()
 const router = Router()
@@ -19,5 +20,6 @@ router.get('/', (req, res) => {
 
 // Handlers
 CategoryHandler.registerRoutes(router)
+SubCategoryHandler.registerRoutes(router)
 
 export {server, router}

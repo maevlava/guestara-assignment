@@ -16,7 +16,7 @@ const registerRoutes = (router: Router) => {
     router.get('/categories', getAllCategories)
     router.get('/categories/search', getCategoryByName)
     router.get('/categories/:id', getCategoryById)
-    router.put('/categories/:id', updateCategory)
+    router.put('/categories/:id', editCategory)
 }
 
 const createCategory = async (req: Request, res: Response) => {
@@ -52,7 +52,7 @@ const getCategoryById = async (req: Request, res: Response) => {
             return sendAPIError(res, CategoryError.NOT_FOUND)
         }
 
-    }catch (e) {
+    } catch (e) {
         return sendAPIError(res, CategoryError.GET_FAILED)
     }
     return sendAPIData(res, category)
@@ -77,7 +77,7 @@ const getCategoryByName = async (req: Request, res: Response) => {
     return sendAPIData(res, category)
 }
 
-const updateCategory = async (req: Request, res: Response) => {
+const editCategory = async (req: Request, res: Response) => {
     let category: any
 
     try {
